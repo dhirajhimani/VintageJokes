@@ -156,13 +156,13 @@ dart_code_metrics:
         child-last: true
     - avoid-nested-conditional-expressions:
         acceptable-level: 3
-    - member-ordering-extended:
-        order:
-          - constructors
-          - public-fields
-          - private-fields
-          - close-method
-          - dispose-method
+#    - member-ordering-extended:
+#        order:
+#          - constructors
+#          - public-fields
+#          - private-fields
+#          - close-method
+#          - dispose-method
         widgets-order:
           - constructor
           - init-state-method

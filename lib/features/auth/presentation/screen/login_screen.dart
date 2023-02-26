@@ -22,7 +22,7 @@ class LoginScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController passwordTextController =
-        useTextEditingController();
+        useTextEditingController(text: 'password');
     final TextEditingController emailTextController =
         useTextEditingController();
 
@@ -31,7 +31,7 @@ class LoginScreen extends HookWidget {
       child: BlocConsumer<LoginBloc, LoginState>(
         builder: (BuildContext context, LoginState state) {
           emailTextController
-            ..value = TextEditingValue(text: state.emailAddress ?? '')
+            ..value = TextEditingValue(text: state.emailAddress ?? 'dhiraj@developer.com')
             ..selection = TextSelection.fromPosition(
               TextPosition(offset: emailTextController.text.length),
             );

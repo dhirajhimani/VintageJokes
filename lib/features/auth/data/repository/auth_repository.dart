@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:chopper/chopper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:vintage_jokes/app/constants/enum.dart';
+import 'package:vintage_jokes/app/utils/dependency_global.dart';
 import 'package:vintage_jokes/app/utils/extensions.dart';
+import 'package:vintage_jokes/app/utils/injection.dart';
 import 'package:vintage_jokes/core/domain/interface/i_local_storage_repository.dart';
 import 'package:vintage_jokes/core/domain/model/failures.dart';
 import 'package:vintage_jokes/core/domain/model/value_objects.dart';
@@ -23,6 +26,8 @@ class AuthRepository implements IAuthRepository {
 
   final AuthService _authService;
 
+  Logger logger = getIt<Logger>();
+
   @override
   Future<Either<Failure, Unit>> login(
     EmailAddress email,
@@ -34,6 +39,10 @@ class AuthRepository implements IAuthRepository {
         'email': emailAddress,
         'password': password.getOrCrash(),
       };
+      // ignore: literal_only_boolean_expressions
+      if (DependencyGlobal.isMockLogin) {
+        return right(unit);
+      }
 
       final Response<LoginResponseDTO> response =
           await _authService.login(requestBody);

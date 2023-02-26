@@ -9,7 +9,10 @@ import 'package:vintage_jokes/features/home/data/service/post_service.dart';
 
 @module
 abstract class ServiceModule {
-  //Local Storage Service
+  @Named('isMockLogin')
+  bool get isMockLogin => const String.fromEnvironment('MOCK_LOGIN').isNotEmpty;
+
+  //Lo   cal Storage Service
   @lazySingleton
   FlutterSecureStorage get flutterSecureStorage => const FlutterSecureStorage();
 
